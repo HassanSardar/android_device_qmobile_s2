@@ -1,4 +1,4 @@
-LOCAL_PATH := device/infinix/d5110_infinix
+LOCAL_PATH := device/qmobile/s2
 
 # Platform
 TARGET_BOARD_PLATFORM := mt6580
@@ -48,7 +48,7 @@ TARGET_USERIMAGES_SPARSE_EXT_DISABLED := false
 BOARD_KERNEL_CMDLINE += \
 	bootopt=64S3,32S1,32S1 \
 	androidboot.selinux=permissive
-	
+
 BOARD_KERNEL_BASE := 0x80000000
 BOARD_KERNEL_PAGESIZE := 2048
 
@@ -63,14 +63,14 @@ TARGET_RUNNING_WITHOUT_SYNC_FRAMEWORK := true
 
 # We use prebuilt kernel to compile because no kernel source code
 
-TARGET_PREBUILT_KERNEL := device/infinix/d5110_infinix/kernel
+TARGET_PREBUILT_KERNEL := $(LOCAL_PATH)/prebuilt/kernel
 BOARD_MKBOOTIMG_ARGS := --kernel_offset 0x00008000 --ramdisk_offset 0x04000000 --tags_offset 0x0e000000 --board X510-D5110-L-20
 BOARD_CUSTOM_BOOTIMG := true
-TARGET_PREBUILT_RECOVERY_KERNEL := device/infinix/d5110_infinix/kernel
+TARGET_PREBUILT_RECOVERY_KERNEL := $(LOCAL_PATH)/prebuilt/kernel
+TARGET_RECOVERY_FSTAB := $(LOCAL_PATH)/rootdir/root/fstab.mt6580
 
-TARGET_RECOVERY_FSTAB := device/infinix/d5110_infinix/rootdir/root/fstab.mt6580
+TARGET_OTA_ASSERT_DEVICE := s2,noir_s2,QMobile_Noir_S2,S2,Noir_S2,"QMobile S2"
 
-TARGET_OTA_ASSERT_DEVICE := d5110,d5110_infinix,Infinix_X510,Infinix_X510_sprout,"Infinix D5110"
 # This is what we need to compile TWRP
 DEVICE_RESOLUTION := 720x1280
 TARGET_SCREEN_HEIGHT := 1280
@@ -99,10 +99,10 @@ DISABLE_DEXPREOPT := true
 BOARD_HAVE_BLUETOOTH := true
 BOARD_HAVE_BLUETOOTH_MTK := true
 BOARD_BLUETOOTH_DOES_NOT_USE_RFKILL := true
-BOARD_BLUETOOTH_BDROID_BUILDCFG_INCLUDE_DIR := device/infinix/d5110_infinix/bluetooth
+BOARD_BLUETOOTH_BDROID_BUILDCFG_INCLUDE_DIR := $(LOCAL_PATH)/bluetooth
 
 # EGL settings
-BOARD_EGL_CFG := device/infinix/d5110_infinix/rootdir/system/lib/egl/egl.cfg
+BOARD_EGL_CFG := $(LOCAL_PATH)/rootdir/system/lib/egl/egl.cfg
 USE_OPENGL_RENDERER := true
 BOARD_EGL_WORKAROUND_BUG_10194508 := true
 
@@ -111,7 +111,7 @@ TARGET_CPU_MEMCPY_OPT_DISABLE := true
 
 # SELINUX
 BOARD_SEPOLICY_DIRS := \
-       device/infinix/d5110_infinix/sepolicy
+       device/qmobile/s2//sepolicy
 
 BOARD_SEPOLICY_UNION := \
        device.te \
@@ -140,4 +140,7 @@ WIFI_DRIVER_FW_PATH_AP:=AP
 WIFI_DRIVER_FW_PATH_P2P:=P2P
 
 # GPS
-TARGET_SPECIFIC_HEADER_PATH := device/infinix/d5110_infinix/include
+TARGET_SPECIFIC_HEADER_PATH := device/qmobile/s2/include
+
+# Hack for building without kernel sources
+$(shell mkdir -p $(OUT)/obj/KERNEL_OBJ/usr)
