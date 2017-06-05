@@ -93,12 +93,18 @@ PRODUCT_COPY_FILES += \
 PRODUCT_PACKAGES += \
     libxlog
 
+    # Audio
 PRODUCT_PACKAGES += \
     audio_policy.default \
+    audio_policy.stub \
+    audio.r_submix.default \
     audio.a2dp.default \
     audio.usb.default \
-    audio.r_submix.default \
-    libdashplayer
+    libaudio-resampler \
+    libdashplayer \
+    libtinyalsa \
+    tinymix
+
 
 PRODUCT_PACKAGES += \
 	libgralloc_extra
