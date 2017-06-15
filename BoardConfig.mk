@@ -109,6 +109,9 @@ BOARD_EGL_WORKAROUND_BUG_10194508 := true
 # Disable memcpy opt (for audio libraries)
 TARGET_CPU_MEMCPY_OPT_DISABLE := true
 
+# Build old-style zip files (required for ota updater)
+BLOCK_BASED_OTA := false
+
 # SELINUX
 BOARD_SEPOLICY_DIRS := \
        device/qmobile/s2//sepolicy
